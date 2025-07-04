@@ -9,27 +9,27 @@
 /* inter-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/inter-v18-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("../fonts/inter-v18-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* inter-700 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
-  src: url('../fonts/inter-v18-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("../fonts/inter-v18-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* lexend-deca-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lexend Deca';
+  font-family: "Lexend Deca";
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/lexend-deca-v22-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("../fonts/lexend-deca-v22-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 :root {
@@ -38,7 +38,7 @@
   font-family: "Inter", sans-serif;
 
   /* Colors */
-  --accent: hsl(277, 64%, 61%);
+  --accent: hsla(283, 53%, 58%, 0.945);
   --card-bg: hsl(244, 38%, 16%);
   --main-bg: hsl(233, 47%, 7%);
   --stat-head: hsla(0, 0%, 100%, 0.6);
@@ -46,11 +46,11 @@
   --white: rgb(255, 255, 255);
 
   /* Variables */
+  --bord-radius: 14px;
 }
 
-body { 
+body {
   background: var(--main-bg);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,60 +59,130 @@ body {
 
 /* --------CONTAINER */
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
   background: var(--card-bg);
-  flex-basis: 1080px;
   position: relative;
+  max-width: 960px;
+  border-radius: var(--bord-radius);
+  overflow: hidden;
 }
 
-.container::before {
-  content:'';
+.container img {
+  width: calc(960px / 2);
   display: block;
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  background-color: rgb(194, 87, 255);
-  mix-blend-mode: multiply;
+  filter: grayscale(1) brightness(1.1) contrast(0.8);
+  mix-blend-mode: screen;
 }
 
-/* --------MAIN CONTAINER */
-.main-container {
-  color: var(--white);
+.container .main-container {
+  padding: 1.44em 3em;
   display: flex;
   flex-direction: column;
-  row-gap: 3em;
-  justify-content: center;
-  padding: 5rem;
-  box-sizing: border-box;
+  justify-content: space-around;
 }
 
-/* --------CONTENT AND STATS */
-.headline {
-  font-size: 2.15em;
+.container .main-container .top-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .highlight {
   color: var(--accent);
 }
 
-.feat-box-sub-head {
-  text-transform: uppercase;
-  font-family: "Lexend Deca",sans-serif;
+.headline {
+  font-size: 2.216em;
 }
 
-.content, .feat-box-sub-head {
+.description {
+  font-size: 0.949em;
+  line-height: 1.6;
   color: var(--stat-head);
 }
 
-.features {
+.container .main-container .features-content {
   display: flex;
-  text-align: center;
   justify-content: space-between;
 }
 
+.container .image-container {
+  display: block;
+  position: relative;
+  width: calc(840px / 2);
+  /* overflow: hidden; */
+}
+
+.container {
+  transition: max-width 0.33s ease-in-out;
+}
+
+.container .image-container::after {
+  content: "";
+  position: absolute;
+  display: block;
+  min-width: 200%;
+  height: 100%;
+  top: 0;
+  background-color: var(--accent);
+  mix-blend-mode: multiply;
+}
+
+.feat-box-head,
+.headline {
+  color: var(--white);
+}
+
 .feat-box-head {
-  font-size: 1.65em;
+  font-weight: 700;
+  font-size: 1.33em;
+  line-height: 1.55;
+}
+
+.feat-box-sub-head {
+  font-size: 0.72em;
+  letter-spacing: 1.88px;
+  font-family: "Lexend deca";
+  text-transform: uppercase;
+  color: var(--stat-head);
+}
+
+@media (max-width: 920px) {
+  .container {
+    min-width: 280px;
+    max-width: 420px;
+    text-align: center;
+    gap: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .container .main-container {
+    gap: 2em;
+    padding: 1.77em 4em;
+  }
+
+  .headline {
+    font-size: 1.95em;
+  }
+
+  .description {
+    font-size: 1em;
+  }
+
+  .container .image-container {
+    grid-row: 1 / 2;
+    width: 100%;
+  }
+
+  .container img {
+    width: 100%;
+  }
+
+  .features-content {
+    flex-direction: column;
+    gap: 2em;
+  }
 }
