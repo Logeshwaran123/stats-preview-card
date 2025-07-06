@@ -47,6 +47,8 @@
 
   /* Variables */
   --bord-radius: 14px;
+  --card-size: 996px;
+  --card-image-size: calc(var(--card-size) / 2);
 }
 
 body {
@@ -64,13 +66,13 @@ body {
   gap: 2rem;
   background: var(--card-bg);
   position: relative;
-  max-width: 960px;
+  max-width: var(--card-size);
   border-radius: var(--bord-radius);
   overflow: hidden;
 }
 
 .container img {
-  width: calc(960px / 2);
+  width: var(--card-image-size);
   display: block;
   filter: grayscale(1) brightness(1.1) contrast(0.8);
   mix-blend-mode: screen;
@@ -112,7 +114,7 @@ body {
 .container .image-container {
   display: block;
   position: relative;
-  width: calc(840px / 2);
+  width: var(--card-image-size);
   /* overflow: hidden; */
 }
 
@@ -122,10 +124,10 @@ body {
 
 .container .image-container::after {
   content: "";
-  position: absolute;
   display: block;
-  min-width: 200%;
+  width: 100%;
   height: 100%;
+  position: absolute;
   top: 0;
   background-color: var(--accent);
   mix-blend-mode: multiply;
